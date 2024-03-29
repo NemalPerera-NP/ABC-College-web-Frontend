@@ -51,9 +51,9 @@ function NewStudentForm({ studentData, onSubmit, action }) {
   };
 
   return (
-    <div id={styles.student_form_container}>
-      <div id={styles.form_container}>
-        <form id={styles.student_form} onSubmit={handleSubmit}>
+    <div className={styles.student_form_container}>
+      <div className={styles.form_container}>
+        <form className={styles.student_form} onSubmit={handleSubmit}>
           <div className={styles.form_input_block}>
             <label>Name with Initials :</label>
             <input
@@ -62,6 +62,7 @@ function NewStudentForm({ studentData, onSubmit, action }) {
               name="stname"
               value={formData.name}
               onChange={handleChange}
+              className={styles.input}
             />
           </div>
           <div className={styles.form_input_block}>
@@ -72,6 +73,7 @@ function NewStudentForm({ studentData, onSubmit, action }) {
               name="address"
               value={formData.address}
               onChange={handleChange}
+              className={styles.input}
             />
           </div>
           <div className={styles.form_input_block}>
@@ -82,6 +84,7 @@ function NewStudentForm({ studentData, onSubmit, action }) {
               name="dob"
               value={formData.dob}
               onChange={handleChange}
+              className={styles.input}
             />
           </div>
           <div className={styles.form_input_block}>
@@ -92,6 +95,7 @@ function NewStudentForm({ studentData, onSubmit, action }) {
               name="gender"
               value={formData.gender}
               onChange={handleChange}
+              className={styles.input}
             />
           </div>
 
@@ -103,6 +107,7 @@ function NewStudentForm({ studentData, onSubmit, action }) {
               name="stnic"
               value={formData.nic}
               onChange={handleChange}
+              className={styles.input}
             />
           </div>
           <div className={styles.form_input_block}>
@@ -113,6 +118,7 @@ function NewStudentForm({ studentData, onSubmit, action }) {
               name="stId"
               value={formData.stId}
               onChange={handleChange}
+              className={styles.input}
             />
           </div>
           <div className={styles.form_input_block}>
@@ -123,6 +129,7 @@ function NewStudentForm({ studentData, onSubmit, action }) {
               name="email"
               value={formData.email}
               onChange={handleChange}
+              className={styles.input}
             />
           </div>
           <div className={styles.form_input_block}>
@@ -134,6 +141,7 @@ function NewStudentForm({ studentData, onSubmit, action }) {
               name="contactnum"
               value={formData.contactNum}
               onChange={handleChange}
+              className={styles.input}
             />
           </div>
         </form>

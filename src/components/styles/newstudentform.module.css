@@ -1,4 +1,4 @@
-#student_form_container {
+.student_form_container {
   background-color: #ffffff;
   width: 70%;
   min-height: 70vh;
@@ -6,27 +6,48 @@
   align-items: center;
   justify-content: center;
   border-radius: 20px;
+  margin-top: 80px;
 }
-#form_container {
+.form_container {
   background-color: aqua;
   display: flex;
   width: 90%;
-  min-height: 60vh;
+  min-height:80%;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  border-radius: 20px;
+  margin: 15px;
+
 }
-#student_form {
+.student_form {
   width: 80%;
-  min-height: 50vh;
+  min-height: 80%;
   display: flex;
   background-color: white;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  border-radius: 20px;
+  margin: 15px;
+
+
 }
 .form_input_block {
+  width: 90%;
   display: flex;
   flex-direction: column;
   margin: 10px;
+}
+
+.input {
+  outline: none;
+  border: none;
+  width: 90%;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #edf5f3;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-size: 14px;
 }
