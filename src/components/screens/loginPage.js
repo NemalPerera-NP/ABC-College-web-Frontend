@@ -22,7 +22,10 @@ function LoginPage() {
     <div className={styles.login_container}>
       <div className={styles.login_form_container}>
         <div className={styles.login_form_container_sub}>
-          <div className={styles.login_logo_container}></div>
+          <div className={styles.login_logo_container}>
+            <h2>ABC</h2>
+            <h2>College</h2>
+          </div>
           <form className={styles.form_container} onSubmit={submit}>
             {!isRegistering && (
               <>
@@ -60,8 +63,8 @@ function LoginPage() {
             </button>
             {loginError && <div className={styles.error_msg}>{loginError}</div>}
 
-            <div className={styles.login_form_text_heading}>
-                <h5>New Here? </h5>
+            <div >
+               {!isRegistering &&(<h5>New Here? </h5>)} 
               {isRegistering ? (
                 <button className={styles.green_btn} onClick={toggleRegistering} type="button">
                   Back to Login
