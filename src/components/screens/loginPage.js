@@ -16,14 +16,17 @@ function LoginPage() {
 
   const toggleRegistering = () => setIsRegistering(!isRegistering);
 
-  const submit = async () => {};
+  const submit = async () => {
+    setLoginError("heloo");
+  };
 
   return (
     <div className={styles.login_container}>
       <div className={styles.login_form_container}>
         <div className={styles.login_form_container_sub}>
           <div className={styles.login_logo_container}>
-            <h2>ABC</h2>
+            <h2>ABC </h2>
+            <br />
             <h2>College</h2>
           </div>
           <form className={styles.form_container} onSubmit={submit}>
@@ -63,19 +66,28 @@ function LoginPage() {
             </button>
             {loginError && <div className={styles.error_msg}>{loginError}</div>}
 
-            <div >
-               {!isRegistering &&(<h5>New Here? </h5>)} 
+            <div className={styles.login_fotter}>
+              {!isRegistering && <h5>New Here? </h5>}
               {isRegistering ? (
-                <button className={styles.green_btn} onClick={toggleRegistering} type="button">
+                <button
+                  className={styles.green_btn}
+                  onClick={toggleRegistering}
+                  type="button"
+                >
                   Back to Login
                 </button>
               ) : (
-                <button className={styles.green_btn} onClick={toggleRegistering} type="button">
+                <button
+                  className={styles.white_btn}
+                  onClick={toggleRegistering}
+                  type="button"
+                >
                   Register
                 </button>
               )}
             </div>
           </form>
+          
         </div>
       </div>
     </div>
