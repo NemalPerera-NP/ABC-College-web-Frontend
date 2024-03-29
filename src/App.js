@@ -1,11 +1,17 @@
-
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LoginPage from "./components/screens/loginPage";
+import SignupPage from "./components/screens/signupPage";
+import HomePage from "./components/screens/homePage";
 
 function App() {
   return (
-  <div>
-    Hello
-  </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/home" element={<HomePage />} />
+      </Routes>
+    </Router>
   );
 }
 
