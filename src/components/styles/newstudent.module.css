@@ -1,0 +1,12 @@
+.student_container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: antiquewhite;
+}
+.body_container {
+    margin-top: 70px ;
+    height: auto;
+    display: flex;
+  align-items: center;
+  justify-content: center;
+}
