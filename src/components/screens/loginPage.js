@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/login.module.css";
+import Logo from "../assets/logo/logo1.jpg"
 
 //logo image should be png
 function LoginPage() {
@@ -25,9 +26,7 @@ function LoginPage() {
       <div className={styles.login_form_container}>
         <div className={styles.login_form_container_sub}>
           <div className={styles.login_logo_container}>
-            <h2>ABC </h2>
-            <br />
-            <h2>College</h2>
+          <img src={Logo} alt="Logo" />
           </div>
           <form className={styles.form_container} onSubmit={submit}>
             {!isRegistering && (
