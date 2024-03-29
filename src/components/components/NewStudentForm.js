@@ -1,5 +1,17 @@
 /*reusable component (form) to enter student details,view and edit details*/
+/*
+Student Form Must Contain
+Name with Initials/
+address/
+DOB/
+gender/
+NIC/
+Student ID Number/
+Email/
+Contact Number/
 
+
+*/
 import React, { useState, useEffect } from "react";
 import styles from "../styles/newstudentform.module.css";
 
@@ -8,7 +20,13 @@ function NewStudentForm({ studentData, onSubmit, action }) {
 
   const [formData, setFormData] = useState({
     name: studentData?.name || "",
-    age: studentData?.age || "",
+    address: studentData?.address || "",
+    dob: studentData?.dob || "",
+    nic: studentData?.nic || "",
+    email: studentData?.email || "",
+    stId: studentData?.stId || "",
+    contactNum: studentData?.contactNum || "",
+    gender: studentData?.gender || "",
     // ... any other fields
   });
 
@@ -37,18 +55,91 @@ function NewStudentForm({ studentData, onSubmit, action }) {
       <div id={styles.form_container}>
         <form id={styles.student_form} onSubmit={handleSubmit}>
           <div className={styles.form_input_block}>
-            <label>Name</label>
+            <label>Name with Initials :</label>
             <input
-            type="text"
-            id="stname"
-            name="stname"
-            value={formData.name}
-            onChange={handleChange}
+              type="text"
+              id="stname"
+              name="stname"
+              value={formData.name}
+              onChange={handleChange}
             />
           </div>
-          <button type="submit">{action === 'create' ? 'Add Student' : 'Update Details'}</button>
+          <div className={styles.form_input_block}>
+            <label>Address :</label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.form_input_block}>
+            <label>Date of Birth :</label>
+            <input
+              type="text"
+              id="dob"
+              name="dob"
+              value={formData.dob}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.form_input_block}>
+            <label>Gender :</label>
+            <input
+              type="text"
+              id="gender"
+              name="gender"
+              value={formData.gender}
+              onChange={handleChange}
+            />
+          </div>
 
+          <div className={styles.form_input_block}>
+            <label>NIC Number :</label>
+            <input
+              type="text"
+              id="stnic"
+              name="stnic"
+              value={formData.nic}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.form_input_block}>
+            <label>Student ID :</label>
+            <input
+              type="text"
+              id="stId"
+              name="stId"
+              value={formData.stId}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.form_input_block}>
+            <label>Email :</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.form_input_block}>
+            <label>Contact Number :</label>
+            <input
+              // adjust the type based on requirment
+              type="text"
+              id="contactnum"
+              name="contactnum"
+              value={formData.contactNum}
+              onChange={handleChange}
+            />
+          </div>
         </form>
+        <button type="submit">
+          {action === "create" ? "Add Student" : "Update Details"}
+        </button>
       </div>
     </div>
   );

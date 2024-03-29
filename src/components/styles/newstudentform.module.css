@@ -1,7 +1,7 @@
 #student_form_container {
   background-color: #ffffff;
   width: 70%;
-  min-height:70vh;
+  min-height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,12 +14,19 @@
   min-height: 60vh;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 #student_form {
   width: 80%;
   min-height: 50vh;
   display: flex;
-  background-color:white;
+  background-color: white;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+}
+.form_input_block {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
 }
