@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import stylessignup from "../styles/signup.module.css";
-import styles from "../styles/login.module.css"
+import styles from "../styles/signup.module.css";
+import styleslogin from "../styles/login.module.css"
 
 function SignupPage() {
   const navigate = useNavigate();
@@ -23,9 +23,10 @@ function SignupPage() {
   const submitSignup = async () => {};
 
   return (
-    <div className={styles.login_container}>
-      <div className={styles.login_form_container}>
-        <form className={stylessignup.sign_form_container} onSubmit={submitSignup}>
+    <div className={styleslogin.login_container}>
+      <div className={styles.signup_form_container}>
+        <div className={styles.signup_form_container_sub}>
+        <form className={styles.form_container} onSubmit={submitSignup}>
           <input
             type="text"
             id="Name"
@@ -95,6 +96,8 @@ function SignupPage() {
             Sing Up
           </button>
         </form>
+        </div>
+        
       </div>
     </div>
   );
