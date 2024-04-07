@@ -30,6 +30,8 @@ function LoginPage() {
       if (response.status === 200) {
         console.log("valid Registration Key");
         // Registration key is valid, navigate to signup page
+        clearReg();
+        clearlogin();
         navigate("/signup");
       } else {
         setLoginError("...........", response);
