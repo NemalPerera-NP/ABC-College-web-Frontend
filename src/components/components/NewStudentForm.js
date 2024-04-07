@@ -150,7 +150,7 @@ function NewStudentForm({ studentData, onSubmit, action }) {
               <div className={styles.error_msg}>{signupError}</div>
             )}
             <button type="submit" className={styles.green_btn}>
-            {action === "create" ? "Add Student" : "Update Details"}
+            {action === "edit" ? "Update Details":"Add Student"}
             </button>
         </form>
         
