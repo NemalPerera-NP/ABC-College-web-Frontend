@@ -15,7 +15,8 @@ function Studentdetail() {
         <Header />
         </div>
       <div className={styles.body_container}>
-        <NewStudentForm />
+        {/* <NewStudentForm /> */}
+        <NewStudentForm action="create" />
       </div>
     </div>
   );
