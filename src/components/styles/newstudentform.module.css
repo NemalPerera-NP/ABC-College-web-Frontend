@@ -10,7 +10,7 @@
   margin-bottom: 40px;
 }
 .form_container {
-  background-color:white;
+  background-color: white;
   display: flex;
   width: 40%;
   min-height: 80%;
@@ -43,6 +43,17 @@
   outline: none;
   border: none;
   width: 90%;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #edf5f3;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+.inputdrop {
+  outline: none;
+  border: none;
+  width: 95%;
   padding: 15px;
   border-radius: 10px;
   background-color: #edf5f3;

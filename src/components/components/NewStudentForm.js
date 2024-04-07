@@ -56,87 +56,97 @@ function NewStudentForm({ studentData, onSubmit, action }) {
       <div className={styles.form_container}>
         <form className={styles.student_form} onSubmit={handleSubmit}>
           <div className={styles.form_input_block}>
-            <label>Name with Initials :</label>
+            <label htmlFor="stname">Name with Initials :</label>
             <input
               type="text"
               id="stname"
               name="stname"
               value={formData.name}
               onChange={handleChange}
+              required
               className={styles.input}
             />
           </div>
           <div className={styles.form_input_block}>
-            <label>Address :</label>
+            <label htmlFor="address">Address :</label>
             <input
               type="text"
               id="address"
               name="address"
               value={formData.address}
               onChange={handleChange}
+              required
               className={styles.input}
             />
           </div>
           <div className={styles.form_input_block}>
-            <label>Date of Birth :</label>
+            <label htmlFor="dob">Date of Birth :</label>
             <input
-              type="text"
+              type="date"
               id="dob"
               name="dob"
               value={formData.dob}
               onChange={handleChange}
+              required
               className={styles.input}
             />
           </div>
           <div className={styles.form_input_block}>
-            <label>Gender :</label>
-            <input
-              type="text"
+            <label htmlFor="gender">Gender :</label>
+
+            <select
               id="gender"
               name="gender"
               value={formData.gender}
               onChange={handleChange}
-              className={styles.input}
-            />
+              required
+              className={styles.inputdrop}
+            >
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
 
           <div className={styles.form_input_block}>
-            <label>NIC Number :</label>
+            <label htmlFor="nic">NIC Number :</label>
             <input
               type="text"
               id="stnic"
               name="stnic"
               value={formData.nic}
               onChange={handleChange}
+              required
               className={styles.input}
             />
           </div>
           <div className={styles.form_input_block}>
-            <label>Student ID :</label>
+            <label htmlFor="stId">Student ID :</label>
             <input
               type="text"
               id="stId"
               name="stId"
               value={formData.stId}
               onChange={handleChange}
+              required
               className={styles.input}
             />
           </div>
           <div className={styles.form_input_block}>
-            <label>Email :</label>
+            <label htmlFor="email">Email :</label>
             <input
               type="email"
               id="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
+              required
               className={styles.input}
             />
           </div>
           <div className={styles.form_input_block}>
-            <label>Contact Number :</label>
+            <label htmlFor="contactnum">Contact Number :</label>
             <input
-              // adjust the type based on requirment
               type="text"
               id="contactnum"
               name="contactnum"
@@ -146,14 +156,11 @@ function NewStudentForm({ studentData, onSubmit, action }) {
             />
           </div>
 
-          {signupError && (
-              <div className={styles.error_msg}>{signupError}</div>
-            )}
-            <button type="submit" className={styles.green_btn}>
-            {action === "edit" ? "Update Details":"Add Student"}
-            </button>
+          {signupError && <div className={styles.error_msg}>{signupError}</div>}
+          <button type="submit" className={styles.green_btn}>
+            {action === "edit" ? "Update Details" : "Add Student"}
+          </button>
         </form>
-        
       </div>
     </div>
   );
