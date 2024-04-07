@@ -4,7 +4,6 @@ import styles from "../styles/login.module.css";
 import Logo from "../assets/logo/logo1.jpg";
 import axios from "axios";
 
-//logo image should be png
 function LoginPage() {
   //setting up navigation between screeens
   const navigate = useNavigate();
@@ -18,7 +17,6 @@ function LoginPage() {
 
   const toggleRegistering = () => setIsRegistering(!isRegistering);
 
-  // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {});
 
   const verifyRegistrationKey = async () => {
@@ -30,6 +28,7 @@ function LoginPage() {
         }
       );
       if (response.status === 200) {
+        console.log("valid Registration Key");
         // Registration key is valid, navigate to signup page
         navigate("/signup");
       } else {
@@ -40,6 +39,7 @@ function LoginPage() {
         "Error verifying registration key:..........",
         error.message
       );
+
       setLoginError("Error verifying registration key. Please try again.");
     }
   };
@@ -51,18 +51,59 @@ function LoginPage() {
       console.log("isRegistering true......", isRegistering);
       await verifyRegistrationKey();
     } else {
+      clearReg();
+      console.log("login.... and regkey...", regkey);
+
       console.log("isRegistering false......", isRegistering);
 
       try {
-      } catch (error) {}
+        const response = await axios.post(
+          "http://localhost:8080/api/auth/login",
+          { username, password }
+        );
+        if (response.status === 200) {
+          // success
+          console.log("Login successful", response.data);
+          console.log("Login successful data......", response.data.data);
+          console.log("Login successful token......", response.data.token);
+
+          localStorage.setItem("UserId", response.data.data.id);
+          localStorage.setItem("TOKEN", response.data.token);
+          localStorage.setItem("UserName", response.data.data.name);
+
+          navigate("/home");
+        } else {
+          // other statuses
+          console.log("Other status:", response.data.message);
+          setLoginError(response.data.message);
+        }
+      } catch (error) {
+        if (error.response) {
+          console.log("erroorrrr,,,,,", error.response.data.message);
+          console.log("error.response.data......", error.response.data);
+          console.log("error.response.status.......", error.response.status);
+          console.log("error.response.headers.......", error.response.headers);
+          setLoginError(`Login failed: ${error.response.data.message}`);
+        } else if (error.request) {
+          //no response received
+          console.log(error.request);
+        } else {
+          // Something happened in the request
+          console.log("Error", error.message);
+        }
+      }
     }
   };
 
   const clearlogin = () => {
     setPassword("");
     setUsername("");
+    setLoginError("");
   };
- 
+  const clearReg = () => {
+    setLoginError("");
+    setRegkey("");
+  };
 
   return (
     <div className={styles.login_container}>
