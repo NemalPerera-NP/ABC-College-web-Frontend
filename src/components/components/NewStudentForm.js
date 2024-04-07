@@ -29,6 +29,7 @@ function NewStudentForm({ studentData, onSubmit, action }) {
     gender: studentData?.gender || "",
     // ... any other fields
   });
+  const [signupError, setSignuprror] = useState("");
 
   // Update form data if studentData changes (for edit functionality)
   useEffect(() => {
@@ -144,10 +145,15 @@ function NewStudentForm({ studentData, onSubmit, action }) {
               className={styles.input}
             />
           </div>
+
+          {signupError && (
+              <div className={styles.error_msg}>{signupError}</div>
+            )}
+            <button type="submit" className={styles.green_btn}>
+            {action === "create" ? "Add Student" : "Update Details"}
+            </button>
         </form>
-        <button type="submit">
-          {action === "create" ? "Add Student" : "Update Details"}
-        </button>
+        
       </div>
     </div>
   );

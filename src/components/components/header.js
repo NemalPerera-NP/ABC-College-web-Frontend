@@ -15,9 +15,9 @@ function Header() {
           <img src={Logo} alt="Logo" />
         </div>
         <nav className={styles.navLinks}>
-          <a href="/">Home</a>
-          <a href="/dashboard">Dashboard</a>
-          <a href="/new-student">New Student</a>
+          <a href="/home">Home</a>
+          {/* <a href="/dashboard">Dashboard</a> */}
+          <a href="/studentdetails">New Student</a>
         </nav>
       </div>
       <div className={styles.dropdown}>
@@ -38,7 +38,7 @@ function Header() {
           <div className={styles.dropdownContent}>
             <a href="/profile">Profile</a>
             <a href="/logout">Logout</a>
-            {/* Add more dropdown links here */}
+            {/*  more  links here */}
           </div>
         )}
       </div>
