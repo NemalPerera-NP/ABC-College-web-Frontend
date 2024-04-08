@@ -31,9 +31,7 @@ const StudentDataTable = () => {
       }
     } catch (error) {
       if (error.response) {
-        alert(
-          `data fetching failed: ${error.response.data.message}`
-        );
+        alert(`data fetching failed: ${error.response.data.message}`);
       } else if (error.request) {
         //no response received
         console.log(error.request);
@@ -100,17 +98,28 @@ const StudentDataTable = () => {
                 <td>
                   <button
                     className={styles.view_btn}
-                    onClick={() => navigate(`/studentdetails`,student.id,"view")}
+                    // onClick={() => navigate(`/studentdetails`,student.id,"view")}
+                    onClick={() =>
+                      navigate(`/studentdetails`, {
+                        state: { studentId: student.id, action: "view" },
+                      })
+                    }
                   >
                     View
                   </button>
                   <button
                     className={styles.update_btn}
                     onClick={() =>
-                    //   navigate(`/studentdetails/${student.id},${"edit"}`)
-                    navigate(`/studentdetails`,student.id,"edit")
-
+                      navigate(`/studentdetails`, {
+                        state: { studentId: student.id, action: "update" },
+                      })
                     }
+
+                    // onClick={() =>
+                    //   //   navigate(`/studentdetails/${student.id},${"edit"}`)
+                    //   navigate(`/studentdetails`, student.id, "edit")
+
+                    // }
                   >
                     Update
                   </button>

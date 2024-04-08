@@ -16,7 +16,7 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/newstudentform.module.css";
 import axios from "axios";
 
-function NewStudentForm({ studentData, onSubmit, action }) {
+function NewStudentForm({ action, studentData }) {
   // Initialize form fields with student data if available, else empty strings
 
   // const [formData, setFormData] = useState({
@@ -48,9 +48,10 @@ function NewStudentForm({ studentData, onSubmit, action }) {
 
   const emailVal = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
-
   // Assuming studentData is provided for edit, and empty for create
   useEffect(() => {
+    console.log("action...form..", action);
+    console.log("studentId...form...", studentData);
     if (studentData && Object.keys(studentData).length > 0) {
       setFormData({
         ...studentData,
@@ -65,8 +66,8 @@ function NewStudentForm({ studentData, onSubmit, action }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const apiUrl = isEditing
-    ? `http://localhost:8080/api/register/update-students/${formData.student_id}`
-    : "http://localhost:8080/api/register/student";
+      ? `http://localhost:8080/api/register/update-students/${formData.student_id}`
+      : "http://localhost:8080/api/register/student";
 
     try {
       if (emailVal.test(formData.email)) {
@@ -112,8 +113,6 @@ function NewStudentForm({ studentData, onSubmit, action }) {
       }
     }
   };
-
-  
 
   return (
     <div className={styles.student_form_container}>

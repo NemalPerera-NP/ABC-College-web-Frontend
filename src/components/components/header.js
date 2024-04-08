@@ -1,11 +1,20 @@
 import React, { useState } from "react";
 import styles from "../styles/header.module.css";
 import Logo from "../assets/logo/logo1.jpg";
+import { Link, useNavigate } from "react-router-dom";
 //header Component
 function Header() {
+  const navigate = useNavigate();
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+
+  const onclicknavigate = () => {
+    navigate(`/studentdetails`, {
+      state: { studentId: null, action: "Create" },
+    });
+  };
 
   return (
     <header className={styles.header}>
@@ -17,7 +26,10 @@ function Header() {
         <nav className={styles.navLinks}>
           <a href="/home">Home</a>
           {/* <a href="/dashboard">Dashboard</a> */}
-          <a href="/studentdetails">New Student</a>
+          {/* <a href=onclick{}>New Student</a> */}
+          <button onClick={onclicknavigate} className={styles.linkButton}>
+            New Student
+          </button>
         </nav>
       </div>
       <div className={styles.dropdown}>
