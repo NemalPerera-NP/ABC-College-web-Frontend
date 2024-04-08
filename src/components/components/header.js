@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "../styles/header.module.css";
 import Logo from "../assets/logo/logo1.jpg";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 //header Component
 function Header() {
   const navigate = useNavigate();
@@ -15,6 +15,17 @@ function Header() {
       state: { studentId: null, action: "Create" },
     });
   };
+
+  const handleLogout = () => {
+    // confirmation alert
+    const isConfirmed = window.confirm("Are you sure you want to logout?");
+    if (isConfirmed) {
+      localStorage.clear(); // to Clear all local storage items
+      navigate("/");
+    }
+  };
+
+  const handleLKeyChange = () => {};
 
   return (
     <header className={styles.header}>
@@ -46,9 +57,12 @@ function Header() {
         </svg>
         {isDropdownOpen && (
           <div className={styles.dropdownContent}>
-            <a href="/profile">Profile</a>
-            <a href="/logout">Logout</a>
-            {/*  more  links here */}
+            <button onClick={handleLKeyChange} className={styles.linkButton}>
+              Change Key
+            </button>
+            <button onClick={handleLogout} className={styles.linkButton}>
+              Logout
+            </button>
           </div>
         )}
       </div>
