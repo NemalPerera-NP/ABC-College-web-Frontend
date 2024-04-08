@@ -5,7 +5,7 @@ import styles from "../styles/studenttable.module.css";
 
 const StudentDataTable = () => {
   const [students, setStudents] = useState([]);
-
+  const token = localStorage.getItem("TOKEN");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,7 +21,8 @@ const StudentDataTable = () => {
       console.log("fetchStudents....");
 
       const response = await axios.get(
-        `http://localhost:8080/api/register/get-setudents`
+        `http://localhost:8080/api/register/get-setudents`,
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.data.success && Array.isArray(response.data.data.students)) {
         setStudents(response.data.data.students);
@@ -48,7 +49,8 @@ const StudentDataTable = () => {
       try {
         console.log("studentId....", studentId);
         const response = await axios.delete(
-          `http://localhost:8080/api/register/delete-setudents/${studentId}`
+          `http://localhost:8080/api/register/delete-setudents/${studentId}`,
+          { headers: { Authorization: `Bearer ${token}` } }
         );
         console.log("response....", response);
 

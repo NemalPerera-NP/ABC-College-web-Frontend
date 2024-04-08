@@ -36,6 +36,7 @@ function NewStudentForm({ action, studentID }) {
   const [isViewAction, setIsViewAction] = useState("");
   const [read, setRead] = useState(false);
 
+  const token = localStorage.getItem("TOKEN");
   const navigate = useNavigate();
 
   const emailVal = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -62,7 +63,8 @@ function NewStudentForm({ action, studentID }) {
   const fetchStudentById = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/register/get-setudents/${studentID}`
+        `http://localhost:8080/api/register/get-setudents/${studentID}`,
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.data.success) {
         console.log("reponse....", response.data);
@@ -113,7 +115,6 @@ function NewStudentForm({ action, studentID }) {
     const apiUrl = isEditing
       ? `http://localhost:8080/api/register/update-setudents/${studentID}`
       : "http://localhost:8080/api/register/student";
-
     try {
       if (emailVal.test(formData.email)) {
         console.log("email is in correct format");
@@ -122,6 +123,9 @@ function NewStudentForm({ action, studentID }) {
           method: isEditing ? "PUT" : "POST",
           url: apiUrl,
           data: formData,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
 
         if (response.status === 201 || response.status === 200) {
