@@ -5,12 +5,15 @@ import styles from "../styles/studenttable.module.css";
 
 const StudentDataTable = () => {
   const [students, setStudents] = useState([]);
-  const [studentDataTableError, setStudentDataTableError] = useState("");
 
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchStudents();
+    const intervalId = setInterval(fetchStudents, 60000);
+
+    // Clear the interval on component unmount
+    return () => clearInterval(intervalId);
   }, []);
 
   const fetchStudents = async () => {
@@ -27,55 +30,46 @@ const StudentDataTable = () => {
         setStudents([]); // Ensure students is always an array
       }
     } catch (error) {
-        if (error.response) {
-            console.log("erroorrrr,,,,,", error.response.data.message);
-            console.log("error.response.data......", error.response.data);
-            console.log("error.response.status.......", error.response.status);
-            console.log("error.response.headers.......", error.response.headers);
-            setStudentDataTableError(
-              `Signup failed: ${error.response.data.message}`
-            );
-          } else if (error.request) {
-            //no response received
-            console.log(error.request);
-          } else {
-            // Something happened in the request
-            console.log("Error", error.message);
-          }
+      if (error.response) {
+        alert(
+          `data fetching failed: ${error.response.data.message}`
+        );
+      } else if (error.request) {
+        //no response received
+        console.log(error.request);
+      } else {
+        // Something happened in the request
+        console.log("Error", error.message);
+      }
     }
   };
 
+  //working correctly
   const handleDelete = async (studentId) => {
-    if (window.confirm("Are you sure you want to delete this student?")) {
+    if (window.confirm("Are you sure you want to delete this student data?")) {
       try {
-        console.log("studentId....",studentId)
+        console.log("studentId....", studentId);
         const response = await axios.delete(
           `http://localhost:8080/api/register/delete-setudents/${studentId}`
         );
-        console.log("response....",response)
+        console.log("response....", response);
 
         if (response.status === 200) {
-            console.log("Student delet successful", response.data);
+          console.log("Student delet successful", response.data);
 
           alert("Student deleted successfully");
           fetchStudents(); // Refresh the list after deletion
         }
       } catch (error) {
         if (error.response) {
-            console.log("erroorrrr,,,,,", error.response.data.message);
-            console.log("error.response.data......", error.response.data);
-            console.log("error.response.status.......", error.response.status);
-            console.log("error.response.headers.......", error.response.headers);
-            setStudentDataTableError(
-              `Signup failed: ${error.response.data.message}`
-            );
-          } else if (error.request) {
-            //no response received
-            console.log(error.request);
-          } else {
-            // Something happened in the request
-            console.log("Error", error.message);
-          }
+          alert(`delete failed: ${error.response.data.message}`);
+        } else if (error.request) {
+          //no response received
+          console.log(error.request);
+        } else {
+          // Something happened in the request
+          console.log("Error", error.message);
+        }
       }
     }
   };
@@ -106,16 +100,16 @@ const StudentDataTable = () => {
                 <td>
                   <button
                     className={styles.view_btn}
-                    onClick={() =>
-                      navigate(`/studentdetail/view/${student.id}`)
-                    }
+                    onClick={() => navigate(`/studentdetails`,student.id,"view")}
                   >
                     View
                   </button>
                   <button
                     className={styles.update_btn}
                     onClick={() =>
-                      navigate(`/studentdetail/edit/${student.id}`)
+                    //   navigate(`/studentdetails/${student.id},${"edit"}`)
+                    navigate(`/studentdetails`,student.id,"edit")
+
                     }
                   >
                     Update
@@ -131,9 +125,6 @@ const StudentDataTable = () => {
             ))}
           </tbody>
         </table>
-        {studentDataTableError && (
-            <div className={styles.error_msg}>{studentDataTableError}</div>
-          )}
       </div>
     </div>
   );
