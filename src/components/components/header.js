@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import styles from "../styles/header.module.css";
 import Logo from "../assets/logo/logo1.jpg";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 //header Component
 function Header() {
   const navigate = useNavigate();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
-
   const onclicknavigate = () => {
     navigate(`/studentdetails`, {
       state: { studentId: null, action: "Create" },
@@ -25,7 +24,46 @@ function Header() {
     }
   };
 
-  const handleLKeyChange = () => {};
+  const handleLKeyChange = () => {
+    const oldkey = prompt("Please enter the old registration key:");
+    const newkey = prompt("Please enter the new registration key:");
+
+    if (oldkey && newkey) {
+      if (oldkey === newkey) {
+        alert("Both Keeys are the same ");
+      } else {
+        updateRegistrationKey(oldkey, newkey);
+      }
+    }
+  };
+
+  const updateRegistrationKey = async (oldkey, newkey) => {
+    try {
+      const response = await axios.put(
+        "http://localhost:8080/api/auth/update/reg-key",
+        { oldkey, newkey },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("TOKEN")}`,
+          },
+        }
+      );
+      if (response.status === 201) {
+        alert("Registration key updated successfully!");
+      } else {
+        alert(
+          "Registration key updated unsuccessfully!",
+          response.data.message
+        );
+      }
+    } catch (error) {
+      alert(
+        `Failed to update registration key: ${
+          error.response?.data?.message || error.message
+        }`
+      );
+    }
+  };
 
   return (
     <header className={styles.header}>
