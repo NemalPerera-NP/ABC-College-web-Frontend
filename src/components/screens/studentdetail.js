@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "../styles/newstudent.module.css";
 import Header from "../components/header";
 import { useLocation } from "react-router-dom";
@@ -20,7 +20,7 @@ function Studentdetail() {
       <div className={styles.body_container}>
         <NewStudentForm
           action={location.state.action}
-          studentData={location.state.studentId}
+          studentID={location.state.studentId}
         />
       </div>
     </div>

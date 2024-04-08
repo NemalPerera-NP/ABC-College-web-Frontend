@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "../styles/header.module.css";
 import Logo from "../assets/logo/logo1.jpg";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 //header Component
 function Header() {
   const navigate = useNavigate();
@@ -20,13 +20,11 @@ function Header() {
     <header className={styles.header}>
       <div className={styles.logoAndNav}>
         <div className={styles.logo}>
-          {/* Logo here */}
+          {/* Logo */}
           <img src={Logo} alt="Logo" />
         </div>
         <nav className={styles.navLinks}>
           <a href="/home">Home</a>
-          {/* <a href="/dashboard">Dashboard</a> */}
-          {/* <a href=onclick{}>New Student</a> */}
           <button onClick={onclicknavigate} className={styles.linkButton}>
             New Student
           </button>
