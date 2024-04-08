@@ -15,6 +15,7 @@ Contact Number/
 import React, { useState, useEffect } from "react";
 import styles from "../styles/newstudentform.module.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function NewStudentForm({ action, studentID }) {
   const [formData, setFormData] = useState({
@@ -34,6 +35,8 @@ function NewStudentForm({ action, studentID }) {
   const [buttonTittle, setButtonTittle] = useState("Add Student");
   const [isViewAction, setIsViewAction] = useState("");
   const [read, setRead] = useState(false);
+
+  const navigate = useNavigate();
 
   const emailVal = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
@@ -99,7 +102,6 @@ function NewStudentForm({ action, studentID }) {
   };
 
   const handleChange = (e) => {
-    // setFormData({ ...formData, [e.target.name]: e.target.value });
     if (!read) {
       console.log("isViewAction,,,,,,,,", read);
       setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -109,7 +111,7 @@ function NewStudentForm({ action, studentID }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const apiUrl = isEditing
-      ? `http://localhost:8080/api/register/update-students/${formData.studentID}`
+      ? `http://localhost:8080/api/register/update-setudents/${studentID}`
       : "http://localhost:8080/api/register/student";
 
     try {
@@ -122,14 +124,17 @@ function NewStudentForm({ action, studentID }) {
           data: formData,
         });
 
-        if (response.status === 201) {
-          console.log("Student creation successful", response.data);
+        if (response.status === 201 || response.status === 200) {
+          console.log("Student creation/updata successful", response.data);
           alert(
             isEditing
               ? "Student updated successfully"
               : "Student added successfully"
           );
           resetFormData();
+          if (isEditing) {
+            navigate("/home");
+          }
         } else {
           // other statuses
           console.log("Other status:", response.data.message);
@@ -141,13 +146,7 @@ function NewStudentForm({ action, studentID }) {
       }
     } catch (error) {
       if (error.response) {
-        console.log("erroorrrr,,,,,", error.response.data.message);
-        console.log("error.response.data......", error.response.data);
-        console.log("error.response.status.......", error.response.status);
-        console.log("error.response.headers.......", error.response.headers);
-        setStudentCreatingError(
-          `Signup failed: ${error.response.data.message}`
-        );
+        alert(`Request failed: ${error.response.data.message}`);
       } else if (error.request) {
         //no response received
         console.log(error.request);
@@ -171,6 +170,7 @@ function NewStudentForm({ action, studentID }) {
       parent_number: "",
       enrolled_date: "",
     });
+    setStudentCreatingError("");
   };
 
   return (
