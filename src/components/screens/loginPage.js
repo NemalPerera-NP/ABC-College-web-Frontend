@@ -65,9 +65,9 @@ function LoginPage() {
         );
         if (response.status === 200) {
           // success
-          console.log("Login successful", response.data);
-          console.log("Login successful data......", response.data.data);
-          console.log("Login successful token......", response.data.token);
+          // console.log("Login successful", response.data);
+          // console.log("Login successful data......", response.data.data);
+          // console.log("Login successful token......", response.data.token);
 
           localStorage.setItem("UserId", response.data.data.id);
           localStorage.setItem("TOKEN", response.data.token);
@@ -81,10 +81,10 @@ function LoginPage() {
         }
       } catch (error) {
         if (error.response) {
-          console.log("erroorrrr,,,,,", error.response.data.message);
-          console.log("error.response.data......", error.response.data);
-          console.log("error.response.status.......", error.response.status);
-          console.log("error.response.headers.......", error.response.headers);
+          // console.log("erroorrrr,,,,,", error.response.data.message);
+          // console.log("error.response.data......", error.response.data);
+          // console.log("error.response.status.......", error.response.status);
+          // console.log("error.response.headers.......", error.response.headers);
           setLoginError(`Login failed: ${error.response.data.message}`);
         } else if (error.request) {
           //no response received

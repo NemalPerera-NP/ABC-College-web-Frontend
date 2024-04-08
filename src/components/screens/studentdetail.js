@@ -9,7 +9,7 @@ function Studentdetail() {
   const location = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 70); // adjust scroll position to accommodate header heigh
+    window.scrollTo(0, 70); // adjust scroll position
   }, []);
 
   return (

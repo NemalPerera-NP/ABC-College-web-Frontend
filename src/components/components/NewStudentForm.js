@@ -9,6 +9,7 @@ NIC/
 Student ID Number/
 Email/
 Contact Number/
+Parent Contact Number/
 
 
 */
@@ -41,7 +42,7 @@ function NewStudentForm({ action, studentID }) {
 
   const emailVal = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
-  // Assuming studentData is provided for edit, and empty for create
+  // Assuming studentId is provided for edit,View, and empty for create
   useEffect(() => {
     console.log("action...form..", action);
     console.log("studentId...form...", studentID);
@@ -118,7 +119,6 @@ function NewStudentForm({ action, studentID }) {
     try {
       if (emailVal.test(formData.email)) {
         console.log("email is in correct format");
-        // const response = await axios.post(apiUrl, formData);
         const response = await axios({
           method: isEditing ? "PUT" : "POST",
           url: apiUrl,
@@ -325,10 +325,6 @@ function NewStudentForm({ action, studentID }) {
             <div className={styles.error_msg}>{studentCreatingError}</div>
           )}
         </form>
-        {/* <button type="submit" className={styles.green_btn}>
-            {buttonTittle}
-          </button> */}
-        {/* </form> */}
       </div>
     </div>
   );

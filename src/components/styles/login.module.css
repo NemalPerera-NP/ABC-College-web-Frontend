@@ -11,7 +11,7 @@
   width: 100%;
   min-height: 100vh;
   margin: 0;
-  background-image: url("../assets/images/wallpaperflare.com_wallpaper.jpg"); /* Adjust path as needed */
+  background-image: url("../assets/images/wallpaperflare.com_wallpaper.jpg"); 
   background-size: cover;
   background-position: center;
   display: flex;

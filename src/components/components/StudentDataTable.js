@@ -10,9 +10,8 @@ const StudentDataTable = () => {
 
   useEffect(() => {
     fetchStudents();
-    const intervalId = setInterval(fetchStudents, 60000);
+    const intervalId = setInterval(fetchStudents, 60000); //Refresh the list every 1 miniute
 
-    // Clear the interval on component unmount
     return () => clearInterval(intervalId);
   }, []);
 
@@ -43,7 +42,6 @@ const StudentDataTable = () => {
     }
   };
 
-  //working correctly
   const handleDelete = async (studentId) => {
     if (window.confirm("Are you sure you want to delete this student data?")) {
       try {
@@ -84,7 +82,6 @@ const StudentDataTable = () => {
               <th>Name</th>
               <th>Number</th>
               <th>Index</th>
-              {/* Add other headers as needed */}
               <th>Actions</th>
             </tr>
           </thead>
@@ -96,11 +93,9 @@ const StudentDataTable = () => {
                 <td>{student.contact_number}</td>
                 <td>{student.student_id}</td>
 
-                {/* Add other data cells as needed */}
                 <td>
                   <button
                     className={styles.view_btn}
-                    // onClick={() => navigate(`/studentdetails`,student.id,"view")}
                     onClick={() =>
                       navigate(`/studentdetails`, {
                         state: { studentId: student.id, action: "view" },
@@ -116,12 +111,6 @@ const StudentDataTable = () => {
                         state: { studentId: student.id, action: "update" },
                       })
                     }
-
-                    // onClick={() =>
-                    //   //   navigate(`/studentdetails/${student.id},${"edit"}`)
-                    //   navigate(`/studentdetails`, student.id, "edit")
-
-                    // }
                   >
                     Update
                   </button>
