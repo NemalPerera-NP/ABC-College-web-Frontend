@@ -1,4 +1,4 @@
-.home_container {
+.student_container {
   width: 100%;
   min-height: 100vh;
   background-color: antiquewhite;
@@ -11,13 +11,21 @@
   left: 0;
   z-index: 100;
 }
-
 .body_container {
-  padding-top: 100px; /* This offsets the body content down so the top is not hidden under the header */
-  padding: 0;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: aqua;
-  flex-direction: column;
+  background-color: antiquewhite;
+}
+.title_container {
+  /* margin-top: 100px; */
+  margin-top: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  background-color: antiquewhite;
+}
+.title_container h2 {
+margin: 20px;
 }

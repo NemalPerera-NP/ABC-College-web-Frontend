@@ -48,16 +48,6 @@ function NewStudentForm({ studentData, onSubmit, action }) {
 
   const emailVal = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
-  // Update form data if studentData changes (for edit functionality)
-  // useEffect(() => {
-  //   if (studentData) {
-  //     setFormData({
-  //       name: studentData.name,
-  //       age: studentData.age,
-  //       // ... any other fields
-  //     });
-  //   }
-  // }, [studentData]);
 
   // Assuming studentData is provided for edit, and empty for create
   useEffect(() => {
@@ -72,78 +62,58 @@ function NewStudentForm({ studentData, onSubmit, action }) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const apiUrl =
-  //     action === "edit" ? `` : "http://localhost:8080/api/register/student";
-
-  //   try {
-  //     if (emailVal.test(formData.email)) {
-  //       console.log("email is in correct format");
-  //       const response = await axios.post(apiUrl, formData);
-
-  //       if (response.status === 201) {
-  //         console.log("Student creation successful", response.data);
-  //       } else {
-  //         // other statuses
-  //         console.log("Other status:", response.data.message);
-  //         setStudentCreatingError(response.data.message);
-  //       }
-  //     } else {
-  //       setStudentCreatingError("Enter a Valid Email address");
-  //       console.log("Email not valid");
-  //     }
-  //   } catch (error) {
-  //     if (error.response) {
-  //       console.log("erroorrrr,,,,,", error.response.data.message);
-  //       console.log("error.response.data......", error.response.data);
-  //       console.log("error.response.status.......", error.response.status);
-  //       console.log("error.response.headers.......", error.response.headers);
-  //       setStudentCreatingError(
-  //         `Signup failed: ${error.response.data.message}`
-  //       );
-  //     } else if (error.request) {
-  //       //no response received
-  //       console.log(error.request);
-  //     } else {
-  //       // Something happened in the request
-  //       console.log("Error", error.message);
-  //     }
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-   // const isEditing = action === "edit";
     const apiUrl = isEditing
-      ? `http://localhost:8080/api/register/update-students/${formData.student_id}`
-      : "http://localhost:8080/api/register/student";
+    ? `http://localhost:8080/api/register/update-students/${formData.student_id}`
+    : "http://localhost:8080/api/register/student";
 
     try {
-      const response = await axios({
-        method: isEditing ? "PUT" : "POST",
-        url: apiUrl,
-        data: formData,
-      });
+      if (emailVal.test(formData.email)) {
+        console.log("email is in correct format");
+        // const response = await axios.post(apiUrl, formData);
+        const response = await axios({
+          method: isEditing ? "PUT" : "POST",
+          url: apiUrl,
+          data: formData,
+        });
 
-      if (response.status === 200 || response.status === 201) {
-        alert(
-          isEditing
-            ? "Student updated successfully"
-            : "Student added successfully"
-        );
+        if (response.status === 201) {
+          console.log("Student creation successful", response.data);
+          alert(
+            isEditing
+              ? "Student updated successfully"
+              : "Student added successfully"
+          );
+        } else {
+          // other statuses
+          console.log("Other status:", response.data.message);
+          setStudentCreatingError(response.data.message);
+        }
       } else {
-        setStudentCreatingError(
-          `Failed to ${isEditing ? "update" : "add"} student. Please try again.`
-        );
+        setStudentCreatingError("Enter a Valid Email address");
+        console.log("Email not valid");
       }
     } catch (error) {
-      setStudentCreatingError(
-        error.response?.data?.message ||
-          "An error occurred. Please try again later."
-      );
+      if (error.response) {
+        console.log("erroorrrr,,,,,", error.response.data.message);
+        console.log("error.response.data......", error.response.data);
+        console.log("error.response.status.......", error.response.status);
+        console.log("error.response.headers.......", error.response.headers);
+        setStudentCreatingError(
+          `Signup failed: ${error.response.data.message}`
+        );
+      } else if (error.request) {
+        //no response received
+        console.log(error.request);
+      } else {
+        // Something happened in the request
+        console.log("Error", error.message);
+      }
     }
   };
+
+  
 
   return (
     <div className={styles.student_form_container}>
@@ -246,6 +216,18 @@ function NewStudentForm({ studentData, onSubmit, action }) {
               name="contact_number"
               value={formData.contact_number}
               onChange={handleChange}
+              className={styles.input}
+            />
+          </div>
+          <div className={styles.form_input_block}>
+            <label htmlFor="enrolled_date">Enroled Date :</label>
+            <input
+              type="date"
+              id="enrolled_date"
+              name="enrolled_date"
+              value={formData.enrolled_date}
+              onChange={handleChange}
+              required
               className={styles.input}
             />
           </div>
